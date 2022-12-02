@@ -55,7 +55,7 @@
               <username>${db.username}</username>
               <password>${db.password}</password>
               <srcFiles>
-                <srcFile>src/main/resources/intro_schema.sql</srcFile>
+                <srcFile>src/main/resources/intro_multiple_schemas.sql</srcFile>
               </srcFiles>
             </configuration>
           </execution>

@@ -13,9 +13,8 @@
     <maven.compiler.target>11</maven.compiler.target>
     <jooq.version>3.16.0</jooq.version>
     <spring.version>5.2.2.RELEASE</spring.version>
-    <h2.version>2.0.202</h2.version>
-    <sql.maven.version>1.5</sql.maven.version>
     <properties.maven.plugin.version>1.0.0</properties.maven.plugin.version>
+    <postgresql.driver.version>42.5.0</postgresql.driver.version>
   </properties>
 
   <build>
@@ -32,41 +31,11 @@
             </goals>
             <configuration>
               <files>
-                <file>src/main/resources/intro_config.properties</file>
+                <file>src/main/resources/postgres_db_config.properties</file>
               </files>
             </configuration>
           </execution>
         </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>sql-maven-plugin</artifactId>
-        <version>${sql.maven.version}</version>
-        <executions>
-          <execution>
-            <phase>initialize</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <driver>${db.driver}</driver>
-              <url>${db.url}</url>
-              <username>${db.username}</username>
-              <password>${db.password}</password>
-              <srcFiles>
-                <srcFile>src/main/resources/intro_multiple_schemas.sql</srcFile>
-              </srcFiles>
-            </configuration>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
 
       <plugin>
@@ -88,6 +57,12 @@
                 <password>${db.password}</password>
               </jdbc>
               <generator>
+                <database>
+                  <name>phuong</name>
+              <!--    <inputSchema>public</inputSchema> -->
+              <!--    <includes>.*</includes> -->
+              <!--    <excludes></excludes> -->
+                </database>
                 <target>
                   <!-- Define path for generated classes -->
                   <packageName>com.verint.mpathy.db</packageName>
@@ -103,30 +78,32 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.jooq</groupId>
-      <artifactId>jooq</artifactId>
-      <version>${jooq.version}</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jooq/jooq -->
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>${spring.version}</version>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq</artifactId>
+      <version>${jooq.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jooq/jooq-codegen-maven -->
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>${h2.version}</version>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq-codegen-maven</artifactId>
+      <version>${jooq.version}</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/sql-maven-plugin -->
+    <!-- https://mvnrepository.com/artifact/org.jooq/jooq-meta -->
     <dependency>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>sql-maven-plugin</artifactId>
-      <version>${sql.maven.version}</version>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq-meta</artifactId>
+      <version>${jooq.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/properties-maven-plugin -->
     <dependency>
@@ -134,11 +111,11 @@
       <artifactId>properties-maven-plugin</artifactId>
       <version>${properties.maven.plugin.version}</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.jooq/jooq-codegen-maven -->
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
     <dependency>
-      <groupId>org.jooq</groupId>
-      <artifactId>jooq-codegen-maven</artifactId>
-      <version>${jooq.version}</version>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.driver.version}</version>
     </dependency>
   </dependencies>
 

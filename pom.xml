@@ -15,6 +15,7 @@
     <spring.version>5.2.2.RELEASE</spring.version>
     <properties.maven.plugin.version>1.0.0</properties.maven.plugin.version>
     <postgresql.driver.version>42.5.0</postgresql.driver.version>
+    <jooq.codegen.name>org.jooq.codegen.JavaGenerator</jooq.codegen.name>
   </properties>
 
   <build>
@@ -57,8 +58,9 @@
                 <password>${db.password}</password>
               </jdbc>
               <generator>
+                <name>${jooq.codegen.name}</name>
                 <database>
-                  <name>phuong</name>
+              <!--    <name>phuong</name> -->
               <!--    <inputSchema>public</inputSchema> -->
               <!--    <includes>.*</includes> -->
               <!--    <excludes></excludes> -->

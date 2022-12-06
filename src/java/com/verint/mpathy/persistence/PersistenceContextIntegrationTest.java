@@ -1,4 +1,4 @@
-package persistence;
+package com.verint.mpathy.persistence;
 
 import com.verint.mpathy.exception.ExceptionTranslatorListener;
 import javax.sql.DataSource;
